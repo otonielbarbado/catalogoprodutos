@@ -1,0 +1,41 @@
+import axios from "axios"
+
+interface Produto {
+    id: number
+    title: string
+    price: number
+    category: string
+    rating: number
+    thumbnail: string
+}
+export default async function ProdutoPage({ params }: {
+    params: {
+        id:
+        string
+    }
+}) {
+
+
+    const res = await axios.get("https://dummyjson.com/products/:id")
+
+    const produtos = res.data.carts.flatMap((cart: any) => cart.products)
+
+    const idBuscado = Number(params.id)
+
+    const produtoEncontrado = produtos.find((item: any) => item.id === idBuscado)
+
+    const produto: Produto | undefined = produtoEncontrado
+
+    if (!produto) {
+        return
+
+    }
+}
+
+
+
+
+
+
+
+
